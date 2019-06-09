@@ -1,6 +1,6 @@
 import random
 import torch
-
+import torchvision
 from torchvision.transforms import functional as F
 
 
@@ -48,3 +48,12 @@ class ToTensor(object):
     def __call__(self, image, target):
         image = F.to_tensor(image)
         return image, target
+
+
+def get_transforms(train):
+    """ transforms for our image augmentation """
+    transforms = []
+    transforms.append(ToTensor())
+    if train:
+        transforms.append(RandomHorizontalFlip(0.5))
+    return Compose(transforms)

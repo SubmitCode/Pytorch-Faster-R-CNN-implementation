@@ -2,8 +2,7 @@
 
 import unittest
 import pathlib
-import sys
-from src.data.voc_data_reader import VOCDataReader
+from src.data.voc_dataset import VOCDataReader
 
 
 class TestVOCDataReader(unittest.TestCase):
@@ -39,7 +38,8 @@ class TestVOCDataReader(unittest.TestCase):
         self.assertEqual(target['boxes'][0][1].numpy(), 211)
         self.assertEqual(target['boxes'][0][2].numpy(), 324)
         self.assertEqual(target['boxes'][0][3].numpy(), 339)
-        self.assertEqual(img.size, (500, 375))
+        # self.assertEqual(img.size, (500, 375))
+        self.assertEqual(img.shape, (375, 500, 3))
         self.assertEqual(target['labels'][0].numpy(), 8)
 
     def test__len__(self):

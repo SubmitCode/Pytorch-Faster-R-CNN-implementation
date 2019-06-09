@@ -7,8 +7,9 @@ in order to be able to use the VOC Dataset for testing purposes
 import os
 import xml.etree.ElementTree as et
 import pathlib
-from PIL import Image
+# from PIL import Image
 import torch
+import cv2
 
 
 CLASS_NAMES = ['aeroplane', 'bicycle', 'bird', 'boat',
@@ -40,7 +41,8 @@ class VOCDataReader(object):
         # load images ad masks
         img_path = self.path_images / self.imgs[idx]
         annotation_path = self.path_annotations / self.annotations[idx]
-        img = Image.open(img_path).convert("RGB")
+        # img = Image.open(img_path).convert("RGB")
+        img = cv2.cvtColor(cv2.imread(str(img_path)), cv2.COLOR_BGR2RGB)
         annotation_root = et.parse(annotation_path).getroot()
 
 
@@ -49,7 +51,7 @@ class VOCDataReader(object):
         xml_boxes = list(annotation_root.findall('object'))
         num_objs = len(xml_boxes)
         labels = []
-        for i, element in enumerate(xml_boxes):
+        for element in list(xml_boxes):
             box = list(element.find('bndbox'))
             xmin = int(box[0].text)
             ymin = int(box[1].text)
