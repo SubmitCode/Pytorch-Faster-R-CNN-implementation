@@ -89,4 +89,6 @@ target/
 .mypy_cache/
 
 # saved models
-models/rcnn_*
+/models/rcnn_*
+*rcnn*
+*weights*
