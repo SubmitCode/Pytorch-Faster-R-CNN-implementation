@@ -92,3 +92,4 @@ target/
 /models/rcnn_*
 *rcnn*
 *weights*
+*.jsonl
