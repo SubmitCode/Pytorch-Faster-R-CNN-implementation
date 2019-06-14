@@ -92,3 +92,6 @@ target/
 /models/rcnn_*
 *rcnn*
 *weights*
+
+# playground files
+*playground*.py

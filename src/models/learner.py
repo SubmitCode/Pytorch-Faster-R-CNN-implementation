@@ -17,13 +17,17 @@ class LearnFastRCNN:
     """ custom implementation of FastRCNNPredictor """
     def __init__(self, num_classes: int,
                  data_loader: torch.utils.data.DataLoader,
-                 data_loader_test: torch.utils.data.DataLoader):
+                 data_loader_test: torch.utils.data.DataLoader,
+                 device='default'):
         """ constructor """
         self.num_classes = num_classes
         self.data_loader = data_loader
         self.data_loader_test = data_loader_test
         self.model = self.get_model()
-        self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+        if device == 'default':
+            self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+        else:
+            self.device = torch.device(device)
         self.model.to(self.device)
         self.setup_optimizer()
 
@@ -109,7 +113,7 @@ class LearnFastRCNN:
     def save_validation_samples(self, number_of_samples):
         """ validation which is usually run after every epoch """
         self.model.eval()
-        device = torch.device('cuda')
+        device = self.device
         i = 0
         for images, targets in self.data_loader_test:
 

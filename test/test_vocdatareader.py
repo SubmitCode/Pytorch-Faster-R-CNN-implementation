@@ -22,8 +22,8 @@ class TestVOCDataReader(unittest.TestCase):
         data_reader = VOCDataReader(
             str(self.path_root),
             object_categories=self.object_categories)
-        self.assertEqual(len(data_reader.imgs), 3)
-        self.assertEqual(len(data_reader.annotations), 3)
+        self.assertEqual(len(data_reader.imgs), 13)
+        self.assertEqual(len(data_reader.annotations), 13)
 
     def test_getitem(self):
         """ test the __getitem__ function """
@@ -48,4 +48,4 @@ class TestVOCDataReader(unittest.TestCase):
             str(self.path_root),
             object_categories=self.object_categories
         )
-        self.assertEqual(data_reader.__len__(), 3)
+        self.assertEqual(data_reader.__len__(), 13)
