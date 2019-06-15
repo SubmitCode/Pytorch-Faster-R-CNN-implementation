@@ -139,6 +139,6 @@ class LearnFastRCNN:
 
     def torch_to_numpy_image(self, img: torch.Tensor):
         """ convert torch to numpy image on cuda """
-        img = (img.cpu().numpy() * 255).astype(int)
+        img = (img.cpu().numpy() * 255).astype(np.uint8)
         img = np.rollaxis(img, 0, 3)
         return img

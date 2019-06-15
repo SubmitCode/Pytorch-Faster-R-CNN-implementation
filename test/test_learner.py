@@ -42,7 +42,8 @@ class TestLearnFastRCNN(unittest.TestCase):
         [data_loader, _] = get_dataloader(
             self.path, shuffle_train=False,
             batch_size_train=1,
-            perm_images=False)
+            perm_images=False,
+            transform_train=False)
         self.learner.data_loader = data_loader
         it = iter(self.learner.data_loader)
         images, _ = next(it)
@@ -52,7 +53,7 @@ class TestLearnFastRCNN(unittest.TestCase):
         img_numpy = self.learner.torch_to_numpy_image(image)
         img_org = cv2.cvtColor(cv2.imread(self.path + '/JPEGImages/000005.jpg'), cv2.COLOR_BGR2RGB)
         self.assertEqual(img_numpy.shape, img_org.shape)
-        # TO DO self.assertTrue(np.all(img_numpy == img_org))
+        self.assertTrue(np.all(img_numpy == img_org))
 
     """
     def test_save_validation_samples(self):

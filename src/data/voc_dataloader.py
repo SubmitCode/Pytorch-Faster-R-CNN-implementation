@@ -8,12 +8,14 @@ def get_dataloader(
         batch_size_train=5,
         batch_size_test=5,
         shuffle_train=True,
-        perm_images=True):
+        perm_images=True,
+        transform_train=True,
+        transform_test=False):
     """ get the dataloader objects """
 
     # use our dataset and defined transformations
-    dataset = VOCDataReader(path_folder, get_transforms(train=True))
-    dataset_test = VOCDataReader(path_folder, get_transforms(train=False))
+    dataset = VOCDataReader(path_folder, get_transforms(train=transform_train))
+    dataset_test = VOCDataReader(path_folder, get_transforms(train=transform_test))
 
     # split the dataset in train and test set
     if perm_images:
