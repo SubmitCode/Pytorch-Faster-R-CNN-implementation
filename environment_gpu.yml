@@ -9,6 +9,8 @@ dependencies:
   - pillow
   - flake8
   - pip
+  - jupyter
+  - matplotlib
   - pip:
     - coverage
     - opencv-python

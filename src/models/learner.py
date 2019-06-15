@@ -18,7 +18,8 @@ class LearnFastRCNN:
     def __init__(self, num_classes: int,
                  data_loader: torch.utils.data.DataLoader,
                  data_loader_test: torch.utils.data.DataLoader,
-                 device='default'):
+                 device='default',
+                 freeze_backbone=True):
         """ constructor """
         self.num_classes = num_classes
         self.data_loader = data_loader
@@ -29,7 +30,15 @@ class LearnFastRCNN:
         else:
             self.device = torch.device(device)
         self.model.to(self.device)
+        if freeze_backbone:
+            self.freeze_backbone()
         self.setup_optimizer()
+
+    def freeze_backbone(self):
+        """ freeze all backbone params """
+        for name, param in self.model.named_parameters():
+            if name[:8] == 'backbone':
+                param.requires_grad = False
 
     def setup_optimizer(self):
         """ init optimizer """
@@ -86,6 +95,7 @@ class LearnFastRCNN:
 
             losses = sum(loss for loss in loss_dict.values())
             logging.info(f'''mode=train; loss_box_reg={round(loss_dict['loss_box_reg'].item(), 3)}; loss_classifier={round(loss_dict['loss_classifier'].item(), 3)}; loss_objectness={round(loss_dict['loss_objectness'].item(), 3)}''')
+            print(f'''mode=train; loss_box_reg={round(loss_dict['loss_box_reg'].item(), 3)}; loss_classifier={round(loss_dict['loss_classifier'].item(), 3)}; loss_objectness={round(loss_dict['loss_objectness'].item(), 3)}''')
 
             self.optimizer.zero_grad()
             losses.backward()
@@ -102,6 +112,7 @@ class LearnFastRCNN:
             targets = [{k: v.to(self.device) for k, v in t.items()} for t in targets]
             loss_dict = self.model(images, targets)
             logging.info(f'''mode=train; loss_box_reg={round(loss_dict['loss_box_reg'].item(), 3)}; loss_classifier={round(loss_dict['loss_classifier'].item(), 3)}; loss_objectness={round(loss_dict['loss_objectness'].item(), 3)}''')
+            print(f'''mode=train; loss_box_reg={round(loss_dict['loss_box_reg'].item(), 3)}; loss_classifier={round(loss_dict['loss_classifier'].item(), 3)}; loss_objectness={round(loss_dict['loss_objectness'].item(), 3)}''')
 
     @torch.no_grad()
     def evaluate(self):
@@ -133,9 +144,9 @@ class LearnFastRCNN:
                     image = cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (255, 0, 0), 5)
 
                 for i, box in enumerate(output['boxes'].cpu().numpy()):
-                    if output['scores'][i].cpu().numpy() > 0.5:
+                    if output['scores'][i].cpu().numpy() > 0.45:
                         image = cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 5)
-                cv2.imwrite('test.jpg', image)
+                cv2.imwrite(f'test-{i}.jpg', image)
 
     @classmethod
     def torch_to_numpy_image(self, img: torch.Tensor):

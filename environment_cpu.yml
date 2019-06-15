@@ -8,6 +8,8 @@ dependencies:
   - torchvision-cpu
   - pillow
   - flake8
+  - jupyter
+  - matplotlib
   - pip:
     - coverage
     - opencv-python

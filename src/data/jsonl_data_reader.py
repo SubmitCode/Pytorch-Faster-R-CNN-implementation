@@ -52,7 +52,7 @@ class ProdigyDataReader(object):
         base64_string = base64_string[23:]
         imgdata = base64.b64decode(str(base64_string))
         image = Image.open(io.BytesIO(imgdata))
-        return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
+        return np.array(image)
 
     @classmethod
     def write_jsonl(self, file_path, lines):
