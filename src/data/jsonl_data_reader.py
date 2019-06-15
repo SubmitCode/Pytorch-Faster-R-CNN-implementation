@@ -16,7 +16,7 @@ CLASS_NAMES = ['FABI', 'FABI_POO', 'FABI_PISS', 'SOPHIE', 'HUMAN']
 
 
 class ProdigyDataReader(object):
-    """ 
+    """
     ProdigyDataReader
     """
     def __init__(self, root, transforms=None, object_categories=CLASS_NAMES):
@@ -66,7 +66,7 @@ class ProdigyDataReader(object):
 
         boxes = []
         labels = []
-        for element in item['spans']:
+        for element in item.get('spans', []):
             xmin = round(element['points'][1][1])
             ymin = round(element['points'][3][0])
             xmax = round(element['points'][0][1])

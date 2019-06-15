@@ -45,7 +45,6 @@ class VOCDataReader(object):
         img = cv2.cvtColor(cv2.imread(str(img_path)), cv2.COLOR_BGR2RGB)
         annotation_root = et.parse(annotation_path).getroot()
 
-
         # get bounding box coordinates for each mask
         boxes = []
         xml_boxes = list(annotation_root.findall('object'))

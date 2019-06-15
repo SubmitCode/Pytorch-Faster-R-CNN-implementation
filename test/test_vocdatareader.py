@@ -2,7 +2,7 @@
 
 import unittest
 import pathlib
-from src.data.voc_dataset import VOCDataReader
+from src.data.voc_data_reader import VOCDataReader
 
 
 class TestVOCDataReader(unittest.TestCase):

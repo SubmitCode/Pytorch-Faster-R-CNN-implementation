@@ -2,7 +2,7 @@
 
 import unittest
 import pathlib
-from src.data.jsonl_dataset import ProdigyDataReader
+from src.data.jsonl_data_reader import ProdigyDataReader
 
 
 # CLASS_NAMES = ['FABI', 'FABI_POO', 'FABI_PISS', 'SOPHIE', 'HUMAN']

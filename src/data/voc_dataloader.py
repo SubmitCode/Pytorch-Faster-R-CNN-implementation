@@ -1,5 +1,5 @@
 import torch
-from src.data.voc_dataset import VOCDataReader
+from src.data.voc_data_reader import VOCDataReader
 from src.data.transforms import get_transforms
 
 def get_dataloader(

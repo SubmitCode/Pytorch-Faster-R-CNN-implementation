@@ -1,15 +1,15 @@
-""" Tests for voc_data_loader script """
+""" Tests for jsonl_data_laoder script """
 import unittest
 import torch
-from src.data.voc_dataloader import get_dataloader
+from src.data.jsonl_dataloader import get_dataloader
 
 
-class TestVOCDataLoader(unittest.TestCase):
+class TestJSONLDataLoader(unittest.TestCase):
     """ Test class """
 
     def setUp(self):
         """test setup """
-        self.path = 'test/test_data'
+        self.path = 'test/test_data/prodigy/annotation_test.jsonl'
 
     def test_get_dataloader(self):
         """ test of the dataloader function """
@@ -19,8 +19,8 @@ class TestVOCDataLoader(unittest.TestCase):
 
     def test_get_dataloader_train_test_split(self):
         """ test of the dataloader function """
-        [data_loader, data_loader_test] = get_dataloader(self.path, train_test_split=0.8)
-        self.assertEqual(len(data_loader.dataset), 10)
+        [data_loader, data_loader_test] = get_dataloader(self.path, train_test_split=0.5)
+        self.assertEqual(len(data_loader.dataset), 3)
         self.assertEqual(len(data_loader_test.dataset), 3)
 
     def test_get_dataloader_correct_image_format(self):
@@ -37,8 +37,8 @@ class TestVOCDataLoader(unittest.TestCase):
             between 0 and H and 0 and W
             - labels (Tensor[N]): the class label for each ground-truth box
         """
-        [data_loader, _] = get_dataloader(self.path, train_test_split=0.8)
+        [data_loader, _] = get_dataloader(self.path, train_test_split=0.5, class_names=['TEST'])
         it = iter(data_loader)
         images, targets = next(it)
-        self.assertEqual(len(images), 5)
-        self.assertEqual(len(targets), 5)
+        self.assertEqual(len(images), 3)
+        self.assertEqual(len(targets), 3)
