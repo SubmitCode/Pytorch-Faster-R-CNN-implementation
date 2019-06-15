@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation.svg?branch=master)](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation)
+[![Build Status](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation.svg?branch=master)](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation)   ![Codecov](https://img.shields.io/codecov/c/github/submitCode/Pytorch-Faster-R-CNN-implementation.svg)
 
 
 Pytorch Faster R-CNN implementation using Pascal VOC
