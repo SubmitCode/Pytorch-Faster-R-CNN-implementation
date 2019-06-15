@@ -43,5 +43,5 @@ class TestVOCDataLoader(unittest.TestCase):
         self.assertEqual(len(images), 5)
         self.assertEqual(len(targets), 5)
 
-
-    
+if __name__ == '__main__':
+    unittest.main()
