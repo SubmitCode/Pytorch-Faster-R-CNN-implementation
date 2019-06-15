@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation.svg?branch=master)](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation)
+[![Build Status](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation.svg?branch=master)](https://travis-ci.org/SubmitCode/Pytorch-Faster-R-CNN-implementation)   ![Codecov](https://img.shields.io/codecov/c/github/submitCode/Pytorch-Faster-R-CNN-implementation.svg) ![GitHub](https://img.shields.io/github/license/submitCode/Pytorch-Faster-R-CNN-implementation.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a3619a7cce5644098a8438bdcb9be64b)](https://www.codacy.com/app/SubmitCode/Pytorch-Faster-R-CNN-implementation?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SubmitCode/Pytorch-Faster-R-CNN-implementation&amp;utm_campaign=Badge_Grade)
 
 
 Pytorch Faster R-CNN implementation using Pascal VOC
