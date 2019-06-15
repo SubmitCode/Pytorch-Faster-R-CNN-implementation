@@ -22,7 +22,7 @@ def get_dataloader(
         dataset = ProdigyDataReader(path, get_transforms(train=transform_train),
                                     object_categories=class_names)
         dataset_test = ProdigyDataReader(path, get_transforms(train=transform_test),
-                                         object_categories=class_names) 
+                                         object_categories=class_names)
 
     # split the dataset in train and test set
     if perm_images:

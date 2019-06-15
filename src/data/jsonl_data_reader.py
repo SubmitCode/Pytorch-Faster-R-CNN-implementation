@@ -2,7 +2,6 @@
 This class reads jsonl files into memory and replays them.
 
 """
-import json
 import pathlib
 import ujson
 import base64
@@ -12,23 +11,27 @@ import torch
 import numpy as np
 from PIL import Image
 
-CLASS_NAMES = ['FABI', 'FABI_POO', 'FABI_PISS', 'SOPHIE', 'HUMAN']
+LABELS = ['FABI', 'FABI_POO', 'FABI_PISS', 'SOPHIE', 'HUMAN']
 
 
 class ProdigyDataReader(object):
     """
     ProdigyDataReader
     """
-    def __init__(self, root, transforms=None, object_categories=CLASS_NAMES):
+    def __init__(self, root, transforms=None, object_categories=LABELS):
         self.root = pathlib.Path(root)
         self.transforms = transforms
         self.class_names = object_categories
         self.num_classes = len(object_categories)
 
-        assert self.root.exists(), "File does not exist"
-        self.images = [image for image in self.read_jsonl(str(self.root))]
-        assert len(self.images) > 0
+        if self.root.exists:
+            raise AssertionError()
 
+        self.images = [image for image in self.read_jsonl(str(self.root))]
+        if len(self.images) > 0:
+            raise AssertionError()
+
+    @classmethod
     def read_jsonl(self, file_path):
         """Read a .jsonl file and yield its contents line by line.
         file_path (unicode / Path): The file path.
@@ -43,6 +46,7 @@ class ProdigyDataReader(object):
                 except ValueError:
                     continue
 
+    @classmethod
     def stringToRGB(self, base64_string):
         """ convert base64 string to cv2 image """
         base64_string = base64_string[23:]
@@ -50,6 +54,7 @@ class ProdigyDataReader(object):
         image = Image.open(io.BytesIO(imgdata))
         return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
 
+    @classmethod
     def write_jsonl(self, file_path, lines):
         """Create a .jsonl file and dump contents.
         file_path (unicode / Path): The path to the output file.

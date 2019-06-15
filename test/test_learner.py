@@ -54,7 +54,7 @@ class TestLearnFastRCNN(unittest.TestCase):
         img_org = cv2.cvtColor(cv2.imread(self.path + '/JPEGImages/000005.jpg'), cv2.COLOR_BGR2RGB)
         self.assertEqual(img_numpy.shape, img_org.shape)
         self.assertTrue(np.all(img_numpy == img_org))
-    
+
 #    def test_save_validation_samples(self):
 #        test if validation examples have the correct format
 #        img_org = cv2.imread(self.path + '/000005.jpg')

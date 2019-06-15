@@ -12,11 +12,11 @@ import torch
 import cv2
 
 
-CLASS_NAMES = ['aeroplane', 'bicycle', 'bird', 'boat',
-               'bottle', 'bus', 'car', 'cat', 'chair',
-               'cow', 'diningtable', 'dog', 'horse',
-               'motorbike', 'person', 'pottedplant',
-               'sheep', 'sofa', 'train', 'tvmonitor']
+LABELS = ['aeroplane', 'bicycle', 'bird', 'boat',
+          'bottle', 'bus', 'car', 'cat', 'chair',
+          'cow', 'diningtable', 'dog', 'horse',
+          'motorbike', 'person', 'pottedplant',
+          'sheep', 'sofa', 'train', 'tvmonitor']
 
 
 class VOCDataReader(object):
@@ -24,7 +24,7 @@ class VOCDataReader(object):
     this class expects the images in an JPEGImages folder and an Annotations
     folder.
     """
-    def __init__(self, root, transforms=None, object_categories=CLASS_NAMES):
+    def __init__(self, root, transforms=None, object_categories=LABELS):
         self.root = pathlib.Path(root)
         self.path_images = self.root / 'JPEGImages'
         self.path_annotations = self.root / 'Annotations'
@@ -32,8 +32,10 @@ class VOCDataReader(object):
         self.class_names = object_categories
         self.num_classes = len(object_categories)
 
-        assert self.path_images.exists(), "Folder JPEGImages is expected but does not exist"
-        assert self.path_annotations.exists(), "Folder Annotations is expected but does not exist"
+        if self.path_images.exists():
+            raise AssertionError()
+        if self.path_annotations.exists():
+            raise AssertionError()
         self.imgs = list(sorted(os.listdir(str(self.path_images))))
         self.annotations = list(sorted(os.listdir(str(self.path_annotations))))
 
@@ -59,7 +61,7 @@ class VOCDataReader(object):
             boxes.append([xmin, ymin, xmax, ymax])
 
             label = element.find('name').text
-            labels.append(CLASS_NAMES.index(label))
+            labels.append(self.class_names.index(label))
 
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
         labels = torch.as_tensor(labels, dtype=torch.int64)

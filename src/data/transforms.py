@@ -1,6 +1,4 @@
 import random
-import torch
-import torchvision
 from torchvision.transforms import functional as F
 
 
@@ -30,7 +28,7 @@ class RandomHorizontalFlip(object):
 
     def __call__(self, image, target):
         if random.random() < self.prob:
-            height, width = image.shape[-2:]
+            _, width = image.shape[-2:]
             image = image.flip(-1)
             if len(target['boxes']) > 0:
                 bbox = target["boxes"]

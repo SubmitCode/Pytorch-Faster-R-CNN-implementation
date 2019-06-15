@@ -137,6 +137,7 @@ class LearnFastRCNN:
                         image = cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 5)
                 cv2.imwrite('test.jpg', image)
 
+    @classmethod
     def torch_to_numpy_image(self, img: torch.Tensor):
         """ convert torch to numpy image on cuda """
         img = (img.cpu().numpy() * 255).astype(np.uint8)
