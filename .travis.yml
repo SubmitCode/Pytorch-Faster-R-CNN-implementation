@@ -16,5 +16,6 @@ install:
   - source activate pytorch_rcnn_cpu
 # command to run tests
 script:
+  - cd pytorch_fster_r-cnn
   - python -m unittest discover "./test" -p "test_*.py"
   
