@@ -1,0 +1,14 @@
+name: pytorch_rcnn_cpu
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - pytorch-cpu
+  - torchvision-cpu
+  - pillow
+  - flake8
+  - pip:
+    - coverage
+    - opencv-python
+    - tqdm
+    - ujson
