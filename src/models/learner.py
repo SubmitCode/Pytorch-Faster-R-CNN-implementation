@@ -18,7 +18,7 @@ class LearnFastRCNN:
     def __init__(self, num_classes: int,
                  data_loader: torch.utils.data.DataLoader,
                  data_loader_test: torch.utils.data.DataLoader,
-                 device='default'): # pragma: no cover
+                 device='default'):
         """ constructor """
         self.num_classes = num_classes
         self.data_loader = data_loader

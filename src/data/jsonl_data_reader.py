@@ -24,11 +24,11 @@ class ProdigyDataReader(object):
         self.class_names = object_categories
         self.num_classes = len(object_categories)
 
-        if self.root.exists:
+        if self.root.exists() is False:
             raise AssertionError()
 
         self.images = [image for image in self.read_jsonl(str(self.root))]
-        if len(self.images) > 0:
+        if len(self.images) == 0:
             raise AssertionError()
 
     @classmethod

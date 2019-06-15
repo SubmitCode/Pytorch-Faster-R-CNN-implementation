@@ -32,9 +32,9 @@ class VOCDataReader(object):
         self.class_names = object_categories
         self.num_classes = len(object_categories)
 
-        if self.path_images.exists():
+        if self.path_images.exists() is False:
             raise AssertionError()
-        if self.path_annotations.exists():
+        if self.path_annotations.exists() is False:
             raise AssertionError()
         self.imgs = list(sorted(os.listdir(str(self.path_images))))
         self.annotations = list(sorted(os.listdir(str(self.path_annotations))))
