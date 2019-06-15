@@ -11,7 +11,7 @@ before_install:
   - export PATH=/home/travis/miniconda/bin:$PATH
 
 install:
-  - conda create -f environment.yml
+  - conda env create -f environment.yml
   - conda activate pytorch_faster_r-cnn
 # command to run tests
 script:
