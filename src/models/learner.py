@@ -20,7 +20,11 @@ class LearnFastRCNN:
                  data_loader_test: torch.utils.data.DataLoader,
                  device='default',
                  freeze_backbone=True):
-        """ constructor """
+        """ constructor
+        Important to note. The number of classes should be
+        the number of labels + 1.
+        """
+
         self.num_classes = num_classes
         self.data_loader = data_loader
         self.data_loader_test = data_loader_test

@@ -33,10 +33,10 @@ class TestProdigyDataReader(unittest.TestCase):
 
         img, target = data_reader.__getitem__(0)
         self.assertEqual(len(target['boxes']), 1)
-        self.assertEqual(target['boxes'][0][0].numpy(), 3)
-        self.assertEqual(target['boxes'][0][1].numpy(), 263)
-        self.assertEqual(target['boxes'][0][2].numpy(), 89)
-        self.assertEqual(target['boxes'][0][3].numpy(), 446)
+        self.assertEqual(target['boxes'][0][0].numpy(), 263)
+        self.assertEqual(target['boxes'][0][1].numpy(), 3)
+        self.assertEqual(target['boxes'][0][2].numpy(), 446)
+        self.assertEqual(target['boxes'][0][3].numpy(), 89)
         self.assertEqual(img.shape, (352, 640, 3))
         self.assertEqual(self.object_categories[target['labels'][0].numpy()], 'TEST')
 

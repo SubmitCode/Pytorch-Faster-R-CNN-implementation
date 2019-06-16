@@ -64,7 +64,10 @@ class ProdigyDataReader(object):
         pathlib.Path(file_path).open('w', encoding='utf-8').write('\n'.join(data))
 
     def __getitem__(self, idx):
-        """ get item for index """
+        """ get item of the index.
+        In this particular case it is important to understand that the x-axis
+        represents the width and the y-axis the height.
+        """
         item = self.images[idx]
 
         img = self.stringToRGB(item['image'])
@@ -72,10 +75,11 @@ class ProdigyDataReader(object):
         boxes = []
         labels = []
         for element in item.get('spans', []):
-            xmin = round(element['points'][1][1])
-            ymin = round(element['points'][3][0])
-            xmax = round(element['points'][0][1])
-            ymax = round(element['points'][0][0])
+            points = np.array(element['points']).round().astype(int)
+            xmin = np.min(points[:, 0])
+            ymin = np.min(points[:, 1])
+            xmax = np.max(points[:, 0])
+            ymax = np.max(points[:, 1])
             boxes.append([xmin, ymin, xmax, ymax])
 
             label = self.class_names.index(element['label'])
